@@ -21,6 +21,7 @@ export const profile: Profile = {
     secondaryCta: { label: "Contact Me", href: "/#contact" },
   },
   about: {
+    eyebrow: "About Me",
     greeting: "Hi, I'm RUS MANTO",
     bio: "I'm a developer from Indonesia who is passionate about technology, especially in web and mobile development. I enjoy turning ideas into real and useful digital products.",
     tags: ["Developer", "Problem Solver", "Lifelong Learner"],
@@ -39,6 +40,8 @@ export const profile: Profile = {
       eyebrow: "My Skills",
       title: "Technologies I Work With",
       description: "A stack of tools I use to bring ideas to life.",
+      viewAllLabel: "View All Skills",
+      viewLessLabel: "Hide Details",
     },
     projects: {
       eyebrow: "My Projects",

@@ -22,6 +22,11 @@ export interface SectionCopy {
   description: string;
 }
 
+export interface SkillsCopy extends SectionCopy {
+  viewAllLabel: string;
+  viewLessLabel: string;
+}
+
 export interface HeroCta {
   label: string;
   href: string;
@@ -43,11 +48,11 @@ export interface Profile {
   email?: string;
   availability: { isAvailable: boolean; label: string };
   hero: HeroCopy;
-  about: { greeting: string; bio: string; tags: string[] };
+  about: { eyebrow: string; greeting: string; bio: string; tags: string[] };
   stats: ProfileStat[];
   quote: { text: string; author: string };
   sections: {
-    skills: SectionCopy;
+    skills: SkillsCopy;
     projects: SectionCopy;
     journey: SectionCopy;
   };
