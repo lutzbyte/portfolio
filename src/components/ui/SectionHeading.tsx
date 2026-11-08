@@ -6,6 +6,7 @@ type SectionHeadingProps = {
   title: string;
   description?: string;
   action?: ReactNode;
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -14,6 +15,7 @@ export function SectionHeading({
   title,
   description,
   action,
+  as: Heading = "h2",
 }: SectionHeadingProps) {
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -22,9 +24,9 @@ export function SectionHeading({
           <span aria-hidden="true" className="size-2 rounded-full bg-primary" />
           {eyebrow}
         </p>
-        <h2 id={id} className="text-heading mt-3 text-foreground">
+        <Heading id={id} className="text-heading mt-3 text-foreground">
           {title}
-        </h2>
+        </Heading>
         {description ? (
           <p className="mt-2 text-foreground-secondary">{description}</p>
         ) : null}
