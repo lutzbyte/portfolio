@@ -1,6 +1,8 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +11,7 @@ import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/Button";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { cn } from "@/lib/cn";
+import { EASE } from "@/lib/motion";
 import type { NavItem } from "@/types";
 
 type NavbarProps = {
@@ -78,7 +81,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300",
+        "nav-drop fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300",
         solid
           ? "border-border bg-background/75 backdrop-blur-xl"
           : "border-transparent",
@@ -140,44 +143,51 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
         </button>
       </div>
 
-      {open ? (
-        <div
-          id="mobile-menu"
-          className="max-h-[calc(100dvh-4rem)] overflow-y-auto md:hidden"
-          onClick={handlePanelClick}
-        >
-          <div className="container-page pb-5 pt-2">
-            <nav aria-label="Mobile">
-              <ul className="flex flex-col gap-1">
-                {items.map((item) => {
-                  const active = item.anchor === activeAnchor;
-                  return (
-                    <li key={item.id}>
-                      <Link
-                        href={item.url}
-                        aria-current={active ? "location" : undefined}
-                        className={cn(
-                          "flex min-h-12 items-center rounded-xl px-4 text-base font-medium transition-colors duration-200",
-                          active
-                            ? "bg-primary/15 text-primary-light"
-                            : "text-foreground-secondary hover:bg-surface hover:text-foreground",
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-            <div className="mt-4">
-              <Button href={ctaHref} size="lg" arrow className="w-full">
-                {ctaLabel}
-              </Button>
+      <AnimatePresence initial={false}>
+        {open ? (
+          <m.div
+            key="mobile-menu"
+            id="mobile-menu"
+            className="overflow-hidden md:hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            onClick={handlePanelClick}
+          >
+            <div className="container-page max-h-[calc(100dvh-4rem)] overflow-y-auto pb-5 pt-2">
+              <nav aria-label="Mobile">
+                <ul className="flex flex-col gap-1">
+                  {items.map((item) => {
+                    const active = item.anchor === activeAnchor;
+                    return (
+                      <li key={item.id}>
+                        <Link
+                          href={item.url}
+                          aria-current={active ? "location" : undefined}
+                          className={cn(
+                            "flex min-h-12 items-center rounded-xl px-4 text-base font-medium transition-colors duration-200",
+                            active
+                              ? "bg-primary/15 text-primary-light"
+                              : "text-foreground-secondary hover:bg-surface hover:text-foreground",
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+              <div className="mt-4">
+                <Button href={ctaHref} size="lg" arrow className="w-full">
+                  {ctaLabel}
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      ) : null}
+          </m.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

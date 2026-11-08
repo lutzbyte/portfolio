@@ -1,11 +1,13 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import * as m from "motion/react-m";
 import { useState } from "react";
 import { GlassSurface } from "@/components/ui/GlassSurface";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SkillIcon } from "@/components/ui/SkillIcon";
 import { cn } from "@/lib/cn";
+import { VIEWPORT, itemVariants, stagger } from "@/lib/motion";
 import type { Skill, SkillCategory, SkillsCopy } from "@/types";
 
 type SkillGroup = {
@@ -49,9 +51,15 @@ export function SkillsShowcase({ copy, skills, groups }: SkillsShowcaseProps) {
         }
       />
 
-      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <m.ul
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+        variants={stagger(0.05)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT}
+      >
         {skills.map((skill) => (
-          <li key={skill.id}>
+          <m.li key={skill.id} data-reveal variants={itemVariants}>
             <div className="glass glass-interactive group flex min-h-14 items-center gap-3 rounded-xl px-3 py-2 sm:px-4">
               <SkillIcon
                 name={skill.icon}
@@ -61,9 +69,9 @@ export function SkillsShowcase({ copy, skills, groups }: SkillsShowcaseProps) {
                 {skill.name}
               </span>
             </div>
-          </li>
+          </m.li>
         ))}
-      </ul>
+      </m.ul>
 
       <div id="skills-details" hidden={!open} className="mt-6">
         <GlassSurface className="grid gap-6 p-5 sm:grid-cols-2 lg:grid-cols-3">

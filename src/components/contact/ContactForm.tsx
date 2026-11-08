@@ -31,12 +31,15 @@ function messageFor(code: string | undefined): string {
   return errors.generic;
 }
 
+// Tanpa border: bidang terisi. Fokus = latar lebih terang + glow lembut
+// (tetap terlihat jelas untuk pengguna keyboard). Error = latar kemerahan.
 const inputClass = (invalid: boolean) =>
   cn(
-    "w-full rounded-xl border bg-background/60 px-4 py-3 text-base text-foreground transition-colors duration-200 placeholder:text-foreground-muted",
+    "w-full rounded-xl px-4 py-3.5 text-base text-foreground placeholder:text-foreground-muted",
+    "transition-[background-color,box-shadow] duration-200 focus-visible:outline-none",
     invalid
-      ? "border-red-400/70"
-      : "border-border hover:border-primary-light/40 focus:border-primary-light",
+      ? "bg-red-400/10 hover:bg-red-400/15 focus-visible:bg-red-400/15 focus-visible:shadow-[0_0_0_3px_rgba(248,113,113,0.25)]"
+      : "bg-white/[0.06] hover:bg-white/[0.09] focus-visible:bg-white/[0.1] focus-visible:shadow-[0_0_0_3px_rgba(139,92,246,0.35)]",
   );
 
 type FieldProps = {
@@ -49,12 +52,15 @@ type FieldProps = {
 function Field({ id, label, error, children }: FieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-foreground">
+      <label
+        htmlFor={id}
+        className="mb-2 block text-sm font-medium text-foreground-secondary"
+      >
         {label}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="mt-1.5 text-sm text-red-300">
+        <p id={`${id}-error`} className="mt-2 text-sm text-red-300">
           {error}
         </p>
       ) : null}
@@ -109,7 +115,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="flex flex-col items-start gap-3 rounded-xl border border-border bg-background/40 p-5 sm:p-6"
+        className="flex flex-col items-start gap-3 rounded-2xl bg-background/50 p-5 sm:p-6"
       >
         <CircleCheck aria-hidden="true" className="size-8 text-success" />
         <h3 className="text-lg font-bold text-foreground">
@@ -128,7 +134,7 @@ export function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       aria-busy={submitting}
-      className="relative space-y-4 rounded-xl border border-border bg-background/40 p-5 sm:p-6"
+      className="relative space-y-5 rounded-2xl bg-background/50 p-5 sm:p-6"
     >
       <h3 className="text-lg font-bold text-foreground">{copy.form.title}</h3>
 
@@ -181,7 +187,7 @@ export function ContactForm() {
       {status === "error" ? (
         <div
           role="alert"
-          className="flex items-start gap-3 rounded-xl border border-red-400/40 bg-red-400/10 p-3 text-sm text-red-200"
+          className="flex items-start gap-3 rounded-xl bg-red-400/10 p-4 text-sm text-red-200"
         >
           <CircleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
           <div>

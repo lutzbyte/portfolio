@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
@@ -9,11 +10,15 @@ export default function Home() {
   return (
     <main id="main">
       <Hero />
-      <About />
+      <Reveal>
+        <About />
+      </Reveal>
       <Skills />
       <FeaturedProjects />
       <Journey />
-      <Contact />
+      <Reveal>
+        <Contact />
+      </Reveal>
     </main>
   );
 }

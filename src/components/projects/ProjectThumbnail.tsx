@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ImageReveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 import type { ImageAsset } from "@/types";
 
@@ -17,6 +18,26 @@ export function ProjectThumbnail({
   priority = false,
   className = "aspect-[16/10]",
 }: ProjectThumbnailProps) {
+  const media = thumbnail ? (
+    <Image
+      src={thumbnail.src}
+      alt={thumbnail.alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      className="object-cover"
+    />
+  ) : (
+    <div
+      aria-hidden="true"
+      className="flex h-full w-full items-center justify-center bg-surface"
+    >
+      <span className="text-6xl font-extrabold text-primary-light/30">
+        {name.charAt(0)}
+      </span>
+    </div>
+  );
+
   return (
     <div
       className={cn(
@@ -24,25 +45,7 @@ export function ProjectThumbnail({
         className,
       )}
     >
-      {thumbnail ? (
-        <Image
-          src={thumbnail.src}
-          alt={thumbnail.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="object-cover"
-        />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="flex h-full w-full items-center justify-center bg-surface"
-        >
-          <span className="text-6xl font-extrabold text-primary-light/30">
-            {name.charAt(0)}
-          </span>
-        </div>
-      )}
+      {priority ? media : <ImageReveal>{media}</ImageReveal>}
     </div>
   );
 }

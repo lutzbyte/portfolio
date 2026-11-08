@@ -1,0 +1,84 @@
+/* Animasi CSS murni: jalan sejak first paint, tanpa menunggu JavaScript. */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-4%, 6%, 0);
+  }
+}
+
+.rise {
+  animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.rise-d1 { animation-delay: 60ms; }
+.rise-d2 { animation-delay: 140ms; }
+.rise-d3 { animation-delay: 220ms; }
+.rise-d4 { animation-delay: 320ms; }
+.rise-d5 { animation-delay: 420ms; }
+.rise-d6 { animation-delay: 520ms; }
+.rise-d7 { animation-delay: 620ms; }
+
+.nav-drop {
+  animation: nav-drop 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Satu lapisan cahaya yang bergeser sangat pelan di belakang konten. */
+.ambient-glow {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(
+    40rem 30rem at 70% 22%,
+    rgba(139, 92, 246, 0.14),
+    transparent 60%
+  );
+  animation: ambient-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Hover: sedikit terangkat untuk semua permukaan glass interaktif. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .glass-interactive {
+    transition:
+      transform 200ms ease,
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .glass-interactive:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Reduced motion: tanpa animasi sama sekali, konten langsung tampil. */
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .nav-drop,
+  .ambient-glow {
+    animation: none;
+  }
+}

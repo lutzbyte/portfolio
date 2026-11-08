@@ -1,3 +1,4 @@
+import { StaggerList, StaggerListItem } from "@/components/motion/Reveal";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
@@ -26,13 +27,16 @@ export function FeaturedProjects() {
         }
       />
 
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <StaggerList
+        gap={0.1}
+        className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+      >
         {projects.map((project) => (
-          <li key={project.slug} className="h-full">
+          <StaggerListItem key={project.slug} className="h-full">
             <ProjectCard project={project} />
-          </li>
+          </StaggerListItem>
         ))}
-      </ul>
+      </StaggerList>
     </Section>
   );
 }

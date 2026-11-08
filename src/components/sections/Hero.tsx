@@ -1,6 +1,7 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Parallax } from "@/components/motion/Parallax";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SocialLinks } from "@/components/ui/SocialLinks";
@@ -18,20 +19,22 @@ export function Hero() {
     >
       {/* Artwork: di atas teks pada mobile, di kanan pada desktop. */}
       <div className="relative order-first -mb-20 aspect-[4/5] max-h-[28rem] w-full sm:max-h-[34rem] lg:absolute lg:inset-y-0 lg:right-0 lg:order-none lg:mb-0 lg:aspect-auto lg:max-h-none lg:w-[58%]">
-        <Image
-          src={images.hero.src}
-          alt={images.hero.alt}
-          fill
-          priority
-          sizes="(min-width: 1024px) 58vw, 100vw"
-          className="hero-art-mask object-cover object-[60%_18%] lg:object-[50%_30%]"
-        />
+        <Parallax className="absolute -inset-y-8 inset-x-0" distance={32}>
+          <Image
+            src={images.hero.src}
+            alt={images.hero.alt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            className="hero-art-mask object-cover object-[60%_18%] lg:object-[50%_30%]"
+          />
+        </Parallax>
       </div>
 
       <Container className="relative z-10 pb-12 lg:pb-0">
         <div className="max-w-xl lg:max-w-[30rem] xl:max-w-xl">
           {availability.isAvailable ? (
-            <p className="text-eyebrow inline-flex items-center gap-2 text-foreground-secondary">
+            <p className="rise rise-d1 text-eyebrow inline-flex items-center gap-2 text-foreground-secondary">
               <span
                 aria-hidden="true"
                 className="size-2 rounded-full bg-success"
@@ -41,16 +44,20 @@ export function Hero() {
           ) : null}
 
           <h1 id="hero-title" className="text-display mt-5 text-foreground">
-            <span>{firstName}</span>{" "}
-            <span className="text-brand-gradient">{restName.join(" ")}</span>
+            <span className="rise rise-d2 inline-block">{firstName}</span>{" "}
+            <span className="rise rise-d3 text-brand-gradient inline-block">
+              {restName.join(" ")}
+            </span>
           </h1>
 
-          <p className="text-lead mt-5 text-primary-light">{profile.tagline}</p>
-          <p className="mt-4 max-w-md text-foreground-secondary">
+          <p className="rise rise-d4 text-lead mt-5 text-primary-light">
+            {profile.tagline}
+          </p>
+          <p className="rise rise-d5 mt-4 max-w-md text-foreground-secondary">
             {profile.intro}
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="rise rise-d6 mt-7 flex flex-wrap gap-3">
             <Button href={hero.primaryCta.href} arrow>
               {hero.primaryCta.label}
             </Button>
@@ -63,7 +70,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <SocialLinks className="mt-6" />
+          <SocialLinks className="rise rise-d7 mt-6" />
         </div>
       </Container>
 
