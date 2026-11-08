@@ -2,12 +2,17 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import "./motion.css";
+import { OverflowDebug } from "@/components/dev/OverflowDebug";
 import { AmbientBackground } from "@/components/layout/AmbientBackground";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { profile } from "@/data/profile";
+import { seoConfig } from "@/data/seo";
 import { getNavigation } from "@/lib/content";
+import { siteJsonLd } from "@/lib/jsonld";
+import { ogImage } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 const sans = Plus_Jakarta_Sans({
@@ -22,7 +27,13 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-// Metadata lengkap (Open Graph, canonical, dll.) dikerjakan di Fase 9.
+// Token verifikasi dibaca dari env. Kosong = tag tidak dibuat (tidak ada token palsu).
+const googleToken =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || undefined;
+const bingToken =
+  process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim() || undefined;
+
+// Canonical dan openGraph.url diatur per halaman (src/lib/seo.ts), bukan di sini.
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -30,6 +41,34 @@ export const metadata: Metadata = {
     template: `%s | ${profile.name}`,
   },
   description: `${profile.tagline} ${profile.intro}`,
+  applicationName: profile.name,
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  openGraph: {
+    type: "website",
+    siteName: profile.name,
+    locale: seoConfig.ogLocale,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [ogImage.url],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: {
+    google: googleToken,
+    other: bingToken ? { "msvalidate.01": bingToken } : undefined,
+  },
 };
 
 export const viewport: Viewport = {
@@ -41,7 +80,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang={seoConfig.language} data-scroll-behavior="smooth">
       <body
         className={`${sans.variable} ${mono.variable} flex flex-col font-sans antialiased`}
       >
@@ -71,6 +110,8 @@ export default function RootLayout({
           {children}
           <Footer />
         </MotionProvider>
+        <JsonLd data={siteJsonLd()} />
+        <OverflowDebug />
       </body>
     </html>
   );

@@ -5,13 +5,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { ProjectThumbnail } from "@/components/projects/ProjectThumbnail";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { GlassSurface } from "@/components/ui/GlassSurface";
 import { Tag } from "@/components/ui/Tag";
+import { profile } from "@/data/profile";
 import { projectsCopy } from "@/data/projects";
 import { getProjectBySlug, getProjectSlugs } from "@/lib/content";
+import { projectJsonLd } from "@/lib/jsonld";
+import { buildMetadata, projectDescription } from "@/lib/seo";
 import type { ProjectStatus } from "@/types";
 
 type ProjectPageProps = {
@@ -36,10 +40,12 @@ export async function generateMetadata({
 
   if (!project) return { title: projectsCopy.notFound.title };
 
-  return {
+  return buildMetadata({
     title: project.name,
-    description: project.description,
-  };
+    description: projectDescription(project),
+    path: `/projects/${project.slug}`,
+    ogTitle: `${project.name} | ${profile.name}`,
+  });
 }
 
 type DetailBlockProps = {
@@ -79,6 +85,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main id="main" className="pt-16">
+      <JsonLd data={projectJsonLd(project)} />
       <article className="section-y">
         <Container>
           <Link

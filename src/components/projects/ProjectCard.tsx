@@ -9,12 +9,16 @@ import type { Project } from "@/types";
 
 type ProjectCardProps = {
   project: Project;
+  /** h3 di home (di bawah h2 section), h2 di /projects (di bawah h1). */
+  headingLevel?: "h2" | "h3";
 };
 
 const iconLink =
   "flex size-10 items-center justify-center rounded-full text-foreground-secondary transition-colors duration-200 hover:bg-surface-hover hover:text-foreground";
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, headingLevel = "h3" }: ProjectCardProps) {
+  const Heading = headingLevel;
+
   return (
     <GlassSurface
       as="article"
@@ -31,7 +35,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <p className="text-xs font-medium text-foreground-muted">
           {project.category}
         </p>
-        <h3 className="mt-1 text-lg font-bold text-foreground">{project.name}</h3>
+        <Heading className="mt-1 text-lg font-bold text-foreground">
+          {project.name}
+        </Heading>
         <p className="mt-1 text-sm text-foreground-secondary">
           {project.tagline}
         </p>

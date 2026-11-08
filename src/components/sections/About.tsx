@@ -20,9 +20,9 @@ export function About() {
     <Section id="about" labelledBy="about-title">
       <GlassSurface
         as="article"
-        className="grid gap-6 p-4 sm:p-5 md:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_16rem] lg:items-center lg:gap-8"
+        className="grid gap-6 p-4 sm:p-5 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_auto_16rem] xl:items-center xl:gap-8"
       >
-        <div className="flex flex-col gap-5 sm:flex-row md:col-span-2 lg:col-span-1">
+        <div className="flex flex-col gap-5 sm:flex-row md:col-span-2 xl:col-span-1">
           <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden rounded-xl sm:aspect-square sm:w-44">
             <Image
               src={images.about.src}
@@ -54,7 +54,7 @@ export function About() {
           </div>
         </div>
 
-        <dl className="flex flex-col gap-4 lg:border-l lg:border-border lg:pl-8">
+        <dl className="flex flex-col gap-4 xl:border-l xl:border-border xl:pl-8">
           {stats.map((stat) => {
             const Icon = statIcons[stat.icon];
             return (

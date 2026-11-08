@@ -59,7 +59,7 @@ export function ProjectsExplorer({ projects, categories }: ProjectsExplorerProps
         <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {visible.map((project) => (
             <li key={project.slug} className="h-full">
-              <ProjectCard project={project} />
+              <ProjectCard project={project} headingLevel="h2" />
             </li>
           ))}
         </ul>

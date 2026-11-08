@@ -21,7 +21,7 @@ export async function Footer() {
 
   return (
     <footer className="mt-auto border-t border-border">
-      <Container className="grid gap-8 py-10 md:grid-cols-[1fr_auto_1fr] md:items-center">
+      <Container className="grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
         <div>
           <Link href="/" aria-label={`${profile.name} home`} className="inline-block rounded-full">
             <Logo brand={profile.name} />
@@ -31,13 +31,16 @@ export async function Footer() {
           </p>
         </div>
 
-        <nav aria-label={footerCopy.navLabel}>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+        <nav
+          aria-label={footerCopy.navLabel}
+          className="md:order-3 md:col-span-2 lg:order-none lg:col-span-1"
+        >
+          <ul className="flex flex-wrap gap-x-6 gap-y-1">
             {items.map((item) => (
               <li key={item.id}>
                 <Link
                   href={item.url}
-                  className="inline-block py-1 text-sm text-foreground-secondary transition-colors hover:text-primary-light"
+                  className="inline-block py-2 text-sm text-foreground-secondary transition-colors hover:text-primary-light"
                 >
                   {item.label}
                 </Link>

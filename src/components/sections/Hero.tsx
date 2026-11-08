@@ -18,8 +18,13 @@ export function Hero() {
       className="relative isolate flex flex-col overflow-hidden pt-16 lg:min-h-[44rem] lg:justify-center lg:pt-20 xl:min-h-[48rem]"
     >
       {/* Artwork: di atas teks pada mobile, di kanan pada desktop. */}
-      <div className="relative order-first -mb-20 aspect-[4/5] max-h-[28rem] w-full sm:max-h-[34rem] lg:absolute lg:inset-y-0 lg:right-0 lg:order-none lg:mb-0 lg:aspect-auto lg:max-h-none lg:w-[58%]">
-        <Parallax className="absolute -inset-y-8 inset-x-0" distance={32}>
+      <div className="relative order-first -mb-20 aspect-[4/5] max-h-[28rem] w-full sm:max-h-[34rem] lg:absolute lg:inset-y-0 lg:right-0 lg:order-none lg:mb-0 lg:aspect-auto lg:max-h-none lg:w-[58%] lg:max-w-[64rem]">
+        {/* Di mobile gambar diperpanjang sampai tepi atas section (di bawah navbar)
+            agar tidak ada tepi atas yang terlihat. */}
+        <Parallax
+          className="absolute inset-x-0 -top-16 -bottom-8 lg:-top-8"
+          distance={32}
+        >
           <Image
             src={images.hero.src}
             alt={images.hero.alt}
@@ -32,7 +37,7 @@ export function Hero() {
       </div>
 
       <Container className="relative z-10 pb-12 lg:pb-0">
-        <div className="max-w-xl lg:max-w-[30rem] xl:max-w-xl">
+        <div className="max-w-xl lg:max-w-[34rem]">
           {availability.isAvailable ? (
             <p className="rise rise-d1 text-eyebrow inline-flex items-center gap-2 text-foreground-secondary">
               <span

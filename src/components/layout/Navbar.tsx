@@ -55,7 +55,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
         buttonRef.current?.focus();
       }
     };
-    const media = window.matchMedia("(min-width: 48rem)");
+    const media = window.matchMedia("(min-width: 64rem)");
     const onChange = (event: MediaQueryListEvent) => {
       if (event.matches) setMenuPath(null);
     };
@@ -87,7 +87,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
           : "border-transparent",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]">
+      <div className="container-page flex h-16 items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr]">
         <Link
           href="/"
           aria-label={`${brand} home`}
@@ -96,7 +96,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
           <Logo brand={brand} />
         </Link>
 
-        <nav aria-label="Primary" className="glass hidden rounded-full p-1 md:block">
+        <nav aria-label="Primary" className="glass hidden rounded-full p-1 lg:block">
           <ul className="flex items-center gap-1">
             {items.map((item) => {
               const active = item.anchor === activeAnchor;
@@ -120,7 +120,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
           </ul>
         </nav>
 
-        <div className="hidden justify-self-end md:block">
+        <div className="hidden justify-self-end lg:block">
           <Button href={ctaHref} variant="secondary" size="sm" arrow>
             {ctaLabel}
           </Button>
@@ -133,7 +133,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="glass glass-interactive inline-flex size-11 items-center justify-center rounded-full text-foreground md:hidden"
+          className="glass glass-interactive inline-flex size-11 items-center justify-center rounded-full text-foreground lg:hidden"
         >
           {open ? (
             <X aria-hidden="true" className="size-5" />
@@ -148,7 +148,7 @@ export function Navbar({ brand, items, ctaLabel, ctaHref }: NavbarProps) {
           <m.div
             key="mobile-menu"
             id="mobile-menu"
-            className="overflow-hidden md:hidden"
+            className="overflow-hidden lg:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

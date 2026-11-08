@@ -52,7 +52,7 @@ export function SkillsShowcase({ copy, skills, groups }: SkillsShowcaseProps) {
       />
 
       <m.ul
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
         variants={stagger(0.05)}
         initial="hidden"
         whileInView="visible"
