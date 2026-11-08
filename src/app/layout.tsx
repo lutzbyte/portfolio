@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AmbientBackground } from "@/components/layout/AmbientBackground";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { profile } from "@/data/profile";
 import { getNavigation } from "@/lib/content";
@@ -40,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`${sans.variable} ${mono.variable} font-sans antialiased`}
+        className={`${sans.variable} ${mono.variable} flex flex-col font-sans antialiased`}
       >
         <a
           href="#main"
@@ -56,6 +57,7 @@ export default function RootLayout({
           ctaHref={profile.hero.secondaryCta.href}
         />
         {children}
+        <Footer />
       </body>
     </html>
   );

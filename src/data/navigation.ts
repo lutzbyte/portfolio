@@ -9,3 +9,8 @@ export const navigation: NavItem[] = [
   { id: "journey", label: "Journey", url: "/#journey", anchor: "journey", order: 5 },
   { id: "contact", label: "Contact", url: "/#contact", anchor: "contact", order: 6 },
 ];
+
+export const footerCopy = {
+  navLabel: "Footer",
+  rights: "All rights reserved.",
+};
