@@ -5,7 +5,7 @@ export interface ImageAsset {
   height: number;
 }
 
-export type SocialPlatform = "github" | "youtube" | "discord" | "x" | "linkedin";
+export type SocialPlatform = "github" | "youtube" | "instagram" | "x" | "linkedin";
 
 export type StatIcon = "code" | "folder" | "heart";
 
@@ -97,6 +97,7 @@ export type SkillCategory =
   | "Frontend"
   | "Backend"
   | "Language"
+  | "Data"
   | "Database"
   | "Tools"
   | "Platform";
@@ -109,9 +110,15 @@ export type SkillIconKey =
   | "nodejs"
   | "express"
   | "python"
+  | "pandas"
+  | "numpy"
+  | "jupyter"
+  | "scikitlearn"
+  | "matplotlib"
+  | "excel"
   | "git"
   | "docker"
-  | "firebase"
+  | "postgresql"
   | "mysql"
   | "linux";
 

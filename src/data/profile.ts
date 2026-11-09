@@ -3,19 +3,19 @@ import type { Profile } from "@/types";
 // Teks dan angka di bawah berasal dari mockup. Periksa dan sesuaikan dengan data aslimu.
 export const profile: Profile = {
   name: "RUS MANTO",
-  jobTitle: "Developer",
+  jobTitle: "Developer & Data Analyst",
   tagline: "Crafting Digital Experiences Through Code & Creativity.",
   intro:
-    "I'm a passionate developer who loves building modern web applications and beautiful user experiences.",
+    "I'm a passionate developer who loves building modern web applications and turning data into clear, useful insights.",
   location: "Indonesia",
   // Isi email aslimu. Selama kosong, tombol email tidak ditampilkan.
-  email: "",
+  email: "rusmanto.co@gmail.com",
   availability: {
     isAvailable: true,
     label: "Available for new opportunities",
   },
   hero: {
-    keywords: ["Code", "Build", "Improve", "Repeat"],
+    keywords: ["Code", "Analyze", "Build", "Improve", "Repeat"],
     scrollLabel: "Scroll Down",
     primaryCta: { label: "Explore My Work", href: "/#projects" },
     secondaryCta: { label: "Contact Me", href: "/#contact" },
@@ -23,12 +23,12 @@ export const profile: Profile = {
   about: {
     eyebrow: "About Me",
     greeting: "Hi, I'm RUS MANTO",
-    bio: "I'm a developer from Indonesia who is passionate about technology, especially in web and mobile development. I enjoy turning ideas into real and useful digital products.",
-    tags: ["Developer", "Problem Solver", "Lifelong Learner"],
+    bio: "I'm a developer from Indonesia who is passionate about technology, from web and mobile development to data analysis. I enjoy turning ideas into real and useful digital products, and raw data into insights that help make better decisions.",
+    tags: ["Developer", "Data Analyst", "Problem Solver", "Lifelong Learner"],
   },
   stats: [
     { id: "years", value: "2+", label: "Years Coding", icon: "code" },
-    { id: "projects", value: "10+", label: "Projects Completed", icon: "folder" },
+    { id: "projects", value: "1", label: "Projects Completed", icon: "folder" },
     { id: "passion", value: "100%", label: "Passion", icon: "heart" },
   ],
   quote: {
@@ -39,7 +39,8 @@ export const profile: Profile = {
     skills: {
       eyebrow: "My Skills",
       title: "Technologies I Work With",
-      description: "A stack of tools I use to bring ideas to life.",
+      description:
+        "A stack of tools I use to build products and make sense of data.",
       viewAllLabel: "View All Skills",
       viewLessLabel: "Hide Details",
     },
@@ -64,13 +65,13 @@ export const profile: Profile = {
   images: {
     hero: {
       src: "/images/profile/hero.png",
-      alt: "Anime illustration of RUS MANTO looking up at a violet moon at night",
+      alt: "RUS MANTO Hero Image",
       width: 828,
       height: 941,
     },
     about: {
       src: "/images/profile/about.png",
-      alt: "Anime illustration of RUS MANTO from behind, overlooking a city skyline at night",
+      alt: "RUS MANTO About Profile",
       width: 822,
       height: 941,
     },

@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RUS MANTO — Personal Portfolio
 
-## Getting Started
+Website portfolio dark glassmorphism. Konten dikelola lewat `src/data/`,
+jadi menambah proyek atau skill tidak perlu menyentuh komponen.
 
-First, run the development server:
+## Stack
+
+Next.js (App Router) · React · TypeScript · Tailwind CSS v4 · Motion ·
+Lucide React · React Hook Form · Zod · Bun
+
+## Menjalankan (Termux)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+cp .env.example .env.local   # lalu isi nilainya
+bun run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Script `dev` dan `build` memakai `--webpack` karena Termux menjalankan Next.js
+dengan binding WASM. Di mesin lain, flag itu boleh dihapus.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Perintah
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Perintah | Fungsi |
+| --- | --- |
+| `bun run dev` | Server development |
+| `bun run build` | Build produksi |
+| `bun run lint` | ESLint |
+| `bunx tsc --noEmit` | Cek tipe |
+| `bun run scripts/validate-data.ts` | Validasi seluruh data konten |
+| `bash scripts/qa.sh` | Pemeriksaan akhir lengkap (build + uji rute) |
+| `python3 scripts/make-og.py` | Buat ulang gambar OG `public/og.jpg` |
+| `bun run scripts/indexnow.ts` | Kirim URL ke IndexNow (setelah deploy) |
 
-## Learn More
+## Struktur
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/              # halaman, layout, sitemap, robots, API kontak
+├── components/       # layout, sections, projects, ui, motion, seo, contact
+├── data/             # SEMUA konten (profile, projects, skills, ...)
+├── lib/              # helper (content, seo, jsonld, motion, site)
+├── hooks/
+└── types/
+public/images/        # profile/ dan projects/
+scripts/              # QA, validasi, OG, IndexNow
+docs/                 # panduan konten dan deploy
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Variabel lingkungan
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Lihat `.env.example`. Yang wajib untuk produksi: `NEXT_PUBLIC_SITE_URL`.
+Form kontak butuh `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`.
 
-## Deploy on Vercel
+## Dokumen lain
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Mengelola konten](docs/CONTENT.md): menambah proyek, skill, pengalaman, sosial
+- [Deploy ke Vercel](docs/DEPLOY.md): GitHub, Vercel, domain, Search Console, Bing

@@ -4,9 +4,9 @@ import { seoConfig } from "@/data/seo";
 import type { Project } from "@/types";
 
 export const ogImage = {
-  url: seoConfig.ogImagePath,
-  width: 1200,
-  height: 630,
+  url: seoConfig.ogImage.path,
+  width: seoConfig.ogImage.width,
+  height: seoConfig.ogImage.height,
   alt: `${profile.name}: ${profile.tagline}`,
 };
 
